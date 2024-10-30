@@ -23657,65 +23657,11 @@
             },
             {
               "name": {
-                "zh_CN": "布局容器"
-              },
-              "icon": "breadcrumb",
-              "screenshot": "",
-              "snippetName": "ElContainer",
-              "schema": {}
-            },
-            {
-              "name": {
                 "zh_CN": "图标"
               },
               "icon": "icon",
               "screenshot": "",
               "snippetName": "ElIcon",
-              "schema": {}
-            },
-            {
-              "name": {
-                "zh_CN": "链接"
-              },
-              "icon": "link",
-              "screenshot": "",
-              "snippetName": "ElLink",
-              "schema": {}
-            },
-            {
-              "name": {
-                "zh_CN": "文本2.3.0"
-              },
-              "icon": "text",
-              "screenshot": "",
-              "snippetName": "ElText",
-              "schema": {}
-            },
-            {
-              "name": {
-                "zh_CN": "滚动条"
-              },
-              "icon": "expand",
-              "screenshot": "",
-              "snippetName": "ElScrollbar",
-              "schema": {}
-            },
-            {
-              "name": {
-                "zh_CN": "间距"
-              },
-              "icon": "overflow-scroll",
-              "screenshot": "",
-              "snippetName": "ElSpace",
-              "schema": {}
-            },
-            {
-              "name": {
-                "zh_CN": "Provider 全局配置"
-              },
-              "icon": "plugin-icon-language",
-              "screenshot": "",
-              "snippetName": "ElConfigProvider",
               "schema": {}
             },
             {
@@ -23863,15 +23809,6 @@
             },
             {
               "name": {
-                "zh_CN": "提及2.8.0"
-              },
-              "icon": "text-page-review",
-              "screenshot": "",
-              "snippetName": "ElMention",
-              "schema": {}
-            },
-            {
-              "name": {
                 "zh_CN": "单选框"
               },
               "icon": "radio",
@@ -23971,15 +23908,6 @@
             },
             {
               "name": {
-                "zh_CN": "徽章"
-              },
-              "icon": "flowchart-rds",
-              "screenshot": "",
-              "snippetName": "ElBadge",
-              "schema": {}
-            },
-            {
-              "name": {
                 "zh_CN": "日历"
               },
               "icon": "bdlayout",
@@ -24016,15 +23944,6 @@
             },
             {
               "name": {
-                "zh_CN": "描述列表"
-              },
-              "icon": "grid-row-auto",
-              "screenshot": "",
-              "snippetName": "ElDescriptions",
-              "schema": {}
-            },
-            {
-              "name": {
                 "zh_CN": "空状态"
               },
               "icon": "empty",
@@ -24039,15 +23958,6 @@
               "icon": "image",
               "screenshot": "",
               "snippetName": "ElImage",
-              "schema": {}
-            },
-            {
-              "name": {
-                "zh_CN": "Scroll 无限滚动"
-              },
-              "icon": "full-screen",
-              "screenshot": "",
-              "snippetName": "ElInfiniteScroll",
               "schema": {}
             },
             {
@@ -24157,15 +24067,6 @@
             },
             {
               "name": {
-                "zh_CN": "漫游式引导2.5.0"
-              },
-              "icon": "checkout",
-              "screenshot": "",
-              "snippetName": "ElTour",
-              "schema": {}
-            },
-            {
-              "name": {
                 "zh_CN": "树形控件"
               },
               "icon": "tree-shape",
@@ -24184,38 +24085,11 @@
             },
             {
               "name": {
-                "zh_CN": "分段控制器2.7.0"
-              },
-              "icon": "align-content-space-around",
-              "screenshot": "",
-              "snippetName": "ElSegmented",
-              "schema": {}
-            },
-            {
-              "name": {
                 "zh_CN": "固钉"
               },
               "icon": "cancel-full-screen",
               "screenshot": "",
               "snippetName": "ElAffix",
-              "schema": {}
-            },
-            {
-              "name": {
-                "zh_CN": "锚点2.6.0"
-              },
-              "icon": "clock-small",
-              "screenshot": "",
-              "snippetName": "ElAnchor",
-              "schema": {}
-            },
-            {
-              "name": {
-                "zh_CN": "回到顶部"
-              },
-              "icon": "unfold-outline",
-              "screenshot": "",
-              "snippetName": "ElBacktop",
               "schema": {}
             },
             {
@@ -24369,15 +24243,6 @@
               "icon": "border-style-solid",
               "screenshot": "",
               "snippetName": "ElDivider",
-              "schema": {}
-            },
-            {
-              "name": {
-                "zh_CN": "水印 2.4.0"
-              },
-              "icon": "carouselitem",
-              "screenshot": "",
-              "snippetName": "ElWatermark",
               "schema": {}
             }
           ]
