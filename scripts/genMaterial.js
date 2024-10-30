@@ -75,7 +75,7 @@ function createNpmConfig(name) {
   }
 }
 
-function createWidget(type, key) {
+function createWidget(type, _key) {
   let component = EMPTY_VALUE
   if (Array.isArray(type) && type.length > 0) {
     type = type[0]
@@ -90,15 +90,15 @@ function createWidget(type, key) {
       break;
     case Function:
       component = "MetaCodeEditor"
-      props = {language: "json"}
+      props = { language: "json" }
       break;
     case Object:
       component = "MetaCodeEditor"
-      props = {language: "json"}
+      props = { language: "json" }
       break;
     case Array:
       component = "MetaCodeEditor"
-      props = {language: "json"}
+      props = { language: "json" }
       break;
     case Number:
       component = "MetaNumber"
@@ -164,56 +164,25 @@ function getLabelName(key, labelName) {
   if (labelName !== EMPTY_VALUE) {
     return labelName
   }
-  switch (key) {
-    case "a11y":
-      labelName = "是否启用无障碍";
-      break;
-    case "isRange":
-      labelName = "设置一个日期范围";
-      break;
-    case "keyboardNavigation":
-      labelName = "是否允许用户通过键盘进行导航";
-      break;
-    case "disabledHours":
-      labelName = "设置不可选择的小时";
-      break;
-    case "disabledMinutes":
-      labelName = "设置不可选择的分钟";
-      break;
-    case "disabledSeconds":
-      labelName = "设置不可选择的秒钟";
-      break;
-    case "label":
-      labelName = "设置组件的标签";
-      break;
-    case "tabindex":
-      labelName = "定义元素的键盘导航顺序";
-      break;
-    case "ariaLabel":
-      labelName = "为无障碍支持设置元素的可访问标签";
-      break;
-    case "id":
-      labelName = "本机输入id";
-      break;
-    case "containerRole":
-      labelName = "容器角色，为选择器组件提供的内部属性";
-      break;
-    case "role":
-      labelName = "容器角色，为选择器组件提供的内部属性";
-      break;
-    case "popperOptions":
-      labelName = "自定义popper选项，详见[popper.js](https://popper.js.org/docs/v2/)";
-      break;
-    case "validateEvent":
-      labelName = "是否触发表单验证";
-      break;
-    default:
-      // 可选的默认情况
-      break;
-  }
 
+  const LABEL_NAME_MAP = {
+    a11y: "是否启用无障碍",
+    isRange: "设置一个日期范围",
+    keyboardNavigation: "是否允许用户通过键盘进行导航",
+    disabledHours: "设置不可选择的小时",
+    disabledMinutes: "设置不可选择的分钟",
+    disabledSeconds: "设置不可选择的秒钟",
+    label: "设置组件的标签",
+    tabindex: "定义元素的键盘导航顺序",
+    ariaLabel: "为无障碍支持设置元素的可访问标签",
+    id: "本机输入id",
+    containerRole: "容器角色，为选择器组件提供的内部属性",
+    role: "容器角色，为选择器组件提供的内部属性",
+    popperOptions: "自定义popper选项，详见[popper.js](https://popper.js.org/docs/v2/)",
+    validateEvent: "是否触发表单验证"
+  };
 
-  return labelName;
+  return LABEL_NAME_MAP[key] || labelName;
 }
 
 function isContinue(key, name) {
@@ -482,14 +451,15 @@ async function loadBaseDataByMenus(menus, concurrency) {
 
 
 function generateJSONFile(jsonData, fileName = 'output.json', filePath = './') {
+  const logger = console
   const jsonString = JSON.stringify(jsonData, null, 2)
   const fullFilePath = filePath.endsWith('/') ? filePath + fileName : filePath + '/' + fileName
   fs.writeFile(fullFilePath, jsonString, 'utf8', (err) => {
     if (err) {
-      console.error('写入文件时出错：', err)
-    } 
+      logger.error('写入文件时出错：', err)
+    }
     else {
-       console.log(`JSON 数据已成功写入到文件 ${fullFilePath}`)
+      logger.log(`JSON 数据已成功写入到文件 ${fullFilePath}`)
     }
   })
 }
@@ -537,177 +507,177 @@ async function generateComponent(params) {
 } */
 
 async function generateSnippets(params) {
-    const snippets = [];
-    const snippetChildrens = [];
-    
-    for (let i = 0; i < params.length; i++) {
-      const param = params[i];
-  
-      // 根据组件名称进行 icon 替换
-      let iconName = param.icon; // 默认的 icon
-  
-      // 根据组件名称进行条件判断
-      if (param.component === 'ElButton') {
-        iconName = 'button'; // 替换为 assets 目录下的文件名
-      } else if (param.component === 'ElContainer') {
-        iconName = 'breadcrumb'; //布局容器
-      } else if (param.component === 'ElIcon') {
-        iconName = 'icon'; 
-      } else if (param.component === 'ElLink') {
-        iconName = 'link'; 
-      } else if (param.component === 'ElText') {
-        iconName = 'text'; 
-      } else if (param.component === 'ElScrollbar') {
-        iconName = 'expand'; 
-      } else if (param.component === 'ElSpace') {
-        iconName = 'overflow-scroll'; 
-      } else if (param.component === 'ElConfigProvider') {
-        iconName = 'plugin-icon-language'; 
-      } else if (param.component === 'ElAutocomplete') {
-        iconName = 'plus-circle'; 
-      } else if (param.component === 'ElCascader') {
-        iconName = 'transform-origin-center'; 
-      } else if (param.component === 'ElCheckbox') {
-        iconName = 'checkbox'; 
-      } else if (param.component === 'ElColorPicker') {
-        iconName = 'tablefilter'; 
-      } else if (param.component === 'ElDatePicker') {
-        iconName = 'datepick'; 
-      } else if (param.component === 'ElForm') {
-        iconName = 'form'; 
-      } else if (param.component === 'ElInput') {
-        iconName = 'input'; 
-      } else if (param.component === 'ElInputNumber') {
-        iconName = 'numeric'; 
-      } else if (param.component === 'ElMention') {
-        iconName = 'text-page-review'; 
-      } else if (param.component === 'ElRadio') {
-        iconName = 'radio'; 
-      } else if (param.component === 'ElRate') {
-        iconName = 'edit'; 
-      } else if (param.component === 'ElSelect') {
-        iconName = 'select'; 
-      } else if (param.component === 'ElSlider') {
-        iconName = 'flex-alignbaselinerow'; 
-      } else if (param.component === 'ElSwitch') {
-        iconName = 'switch'; 
-      } else if (param.component === 'ElTimePicker') {
-        iconName = 'realtime-flow'; 
-      } else if (param.component === 'ElTimeSelect') {
-        iconName = 'accordion'; 
-      } else if (param.component === 'ElTransfer') {
-        iconName = 'align-content-center'; 
-      } else if (param.component === 'ElTreeSelect') {
-        iconName = 'tree'; 
-      } else if (param.component === 'ElUpload') {
-        iconName = 'unfold-outline'; 
-      } else if (param.component === 'ElAvatar') {
-        iconName = 'stars'; 
-      } else if (param.component === 'ElBadge') {
-        iconName = 'flowchart-rds'; 
-      } else if (param.component === 'ElCalendar') {
-        iconName = 'bdlayout'; 
-      } else if (param.component === 'ElCard') {
-        iconName = 'dialogbox'; 
-      } else if (param.component === 'ElCarousel') {
-        iconName = 'carousel'; 
-      } else if (param.component === 'ElCollapse') {
-        iconName = 'collapse'; 
-      } else if (param.component === 'ElDescriptions') {
-        iconName = 'grid-row-auto'; 
-      } else if (param.component === 'ElEmpty') {
-        iconName = 'empty'; 
-      } else if (param.component === 'ElImage') {
-        iconName = 'image'; 
-      } else if (param.component === 'ElInfiniteScroll') {
-        iconName = 'full-screen'; 
-      } else if (param.component === 'ElPagination') {
-        iconName = 'flex-justifyspace-betweenrow'; 
-      } else if (param.component === 'ElProgress') {
-        iconName = 'tile-x'; 
-      } else if (param.component === 'ElResult') {
-        iconName = 'flow-success'; 
-      } else if (param.component === 'ElSkeleton') {
-        iconName = 'chat-minimize'; 
-      } else if (param.component === 'ElTable') {
-        iconName = 'table'; 
-      } else if (param.component === 'ElTag') {
-        iconName = 'tag'; 
-      } else if (param.component === 'ElTimeline') {
-        iconName = 'timeline'; 
-      } else if (param.component === 'ElTour') {
-        iconName = 'checkout'; 
-      } else if (param.component === 'ElTree') {
-        iconName = 'tree-shape'; 
-      } else if (param.component === 'ElStatistic') {
-        iconName = 'plugin-icon-data'; 
-      } else if (param.component === 'ElSegmented') {
-        iconName = 'align-content-space-around'; 
-      } else if (param.component === 'ElAffix') {
-        iconName = 'cancel-full-screen'; 
-      } else if (param.component === 'ElAnchor') {
-        iconName = 'clock-small'; 
-      } else if (param.component === 'ElBacktop') {
-        iconName = 'unfold-outline'; 
-      } else if (param.component === 'ElBreadcrumb') {
-        iconName = 'breadcrumb'; 
-      } else if (param.component === 'ElDropdown') {
-        iconName = 'dropdown'; 
-      } else if (param.component === 'ElMenu') {
-        iconName = 'menu'; 
-      } else if (param.component === 'ElPageHeader') {
-        iconName = 'text-page-common'; 
-      } else if (param.component === 'ElSteps') {
-        iconName = 'position-top'; 
-      } else if (param.component === 'ElTabs') {
-        iconName = 'tabs'; 
-      } else if (param.component === 'ElAlert') {
-        iconName = 'alert'; 
-      } else if (param.component === 'ElDialog') {
-        iconName = 'chat-maximize'; 
-      } else if (param.component === 'ElDrawer') {
-        iconName = 'collection'; 
-      } else if (param.component === 'ElLoading') {
-        iconName = 'loading'; 
-      } else if (param.component === 'ElMessage') {
-        iconName = 'chat-message'; 
-      } else if (param.component === 'ElMessageBox') {
-        iconName = 'cloud-shell'; 
-      } else if (param.component === 'ElNotification') {
-        iconName = 'warning'; 
-      } else if (param.component === 'ElPopconfirm') {
-        iconName = 'flowchart-evs'; 
-      } else if (param.component === 'ElPopover') {
-        iconName = 'popover'; 
-      } else if (param.component === 'ElTooltip') {
-        iconName = 'tooltip'; 
-      } else if (param.component === 'ElDivider') {
-        iconName = 'border-style-solid'; 
-      } else if (param.component === 'ElWatermark') {
-        iconName = 'carouselitem'; 
-      } 
-  
-      const snippetChildren = {
-        name: { zh_CN: param?.name?.['zh_CN'] || EMPTY_VALUE },
-        icon: iconName, // 使用更新后的 icon
-        screenshot: '', // Screenshot URL or path, if available
-        snippetName: param.component,
-        schema: {} // Schema structure, populate as needed
-      };
-  
-      snippetChildrens.push(snippetChildren);
+  const snippets = [];
+  const snippetChildrens = [];
+
+  for (let i = 0; i < params.length; i++) {
+    const param = params[i];
+
+    // 根据组件名称进行 icon 替换
+    let iconName = param.icon; // 默认的 icon
+
+    // 根据组件名称进行条件判断
+    if (param.component === 'ElButton') {
+      iconName = 'button'; // 替换为 assets 目录下的文件名
+    } else if (param.component === 'ElContainer') {
+      iconName = 'breadcrumb'; //布局容器
+    } else if (param.component === 'ElIcon') {
+      iconName = 'icon';
+    } else if (param.component === 'ElLink') {
+      iconName = 'link';
+    } else if (param.component === 'ElText') {
+      iconName = 'text';
+    } else if (param.component === 'ElScrollbar') {
+      iconName = 'expand';
+    } else if (param.component === 'ElSpace') {
+      iconName = 'overflow-scroll';
+    } else if (param.component === 'ElConfigProvider') {
+      iconName = 'plugin-icon-language';
+    } else if (param.component === 'ElAutocomplete') {
+      iconName = 'plus-circle';
+    } else if (param.component === 'ElCascader') {
+      iconName = 'transform-origin-center';
+    } else if (param.component === 'ElCheckbox') {
+      iconName = 'checkbox';
+    } else if (param.component === 'ElColorPicker') {
+      iconName = 'tablefilter';
+    } else if (param.component === 'ElDatePicker') {
+      iconName = 'datepick';
+    } else if (param.component === 'ElForm') {
+      iconName = 'form';
+    } else if (param.component === 'ElInput') {
+      iconName = 'input';
+    } else if (param.component === 'ElInputNumber') {
+      iconName = 'numeric';
+    } else if (param.component === 'ElMention') {
+      iconName = 'text-page-review';
+    } else if (param.component === 'ElRadio') {
+      iconName = 'radio';
+    } else if (param.component === 'ElRate') {
+      iconName = 'edit';
+    } else if (param.component === 'ElSelect') {
+      iconName = 'select';
+    } else if (param.component === 'ElSlider') {
+      iconName = 'flex-alignbaselinerow';
+    } else if (param.component === 'ElSwitch') {
+      iconName = 'switch';
+    } else if (param.component === 'ElTimePicker') {
+      iconName = 'realtime-flow';
+    } else if (param.component === 'ElTimeSelect') {
+      iconName = 'accordion';
+    } else if (param.component === 'ElTransfer') {
+      iconName = 'align-content-center';
+    } else if (param.component === 'ElTreeSelect') {
+      iconName = 'tree';
+    } else if (param.component === 'ElUpload') {
+      iconName = 'unfold-outline';
+    } else if (param.component === 'ElAvatar') {
+      iconName = 'stars';
+    } else if (param.component === 'ElBadge') {
+      iconName = 'flowchart-rds';
+    } else if (param.component === 'ElCalendar') {
+      iconName = 'bdlayout';
+    } else if (param.component === 'ElCard') {
+      iconName = 'dialogbox';
+    } else if (param.component === 'ElCarousel') {
+      iconName = 'carousel';
+    } else if (param.component === 'ElCollapse') {
+      iconName = 'collapse';
+    } else if (param.component === 'ElDescriptions') {
+      iconName = 'grid-row-auto';
+    } else if (param.component === 'ElEmpty') {
+      iconName = 'empty';
+    } else if (param.component === 'ElImage') {
+      iconName = 'image';
+    } else if (param.component === 'ElInfiniteScroll') {
+      iconName = 'full-screen';
+    } else if (param.component === 'ElPagination') {
+      iconName = 'flex-justifyspace-betweenrow';
+    } else if (param.component === 'ElProgress') {
+      iconName = 'tile-x';
+    } else if (param.component === 'ElResult') {
+      iconName = 'flow-success';
+    } else if (param.component === 'ElSkeleton') {
+      iconName = 'chat-minimize';
+    } else if (param.component === 'ElTable') {
+      iconName = 'table';
+    } else if (param.component === 'ElTag') {
+      iconName = 'tag';
+    } else if (param.component === 'ElTimeline') {
+      iconName = 'timeline';
+    } else if (param.component === 'ElTour') {
+      iconName = 'checkout';
+    } else if (param.component === 'ElTree') {
+      iconName = 'tree-shape';
+    } else if (param.component === 'ElStatistic') {
+      iconName = 'plugin-icon-data';
+    } else if (param.component === 'ElSegmented') {
+      iconName = 'align-content-space-around';
+    } else if (param.component === 'ElAffix') {
+      iconName = 'cancel-full-screen';
+    } else if (param.component === 'ElAnchor') {
+      iconName = 'clock-small';
+    } else if (param.component === 'ElBacktop') {
+      iconName = 'unfold-outline';
+    } else if (param.component === 'ElBreadcrumb') {
+      iconName = 'breadcrumb';
+    } else if (param.component === 'ElDropdown') {
+      iconName = 'dropdown';
+    } else if (param.component === 'ElMenu') {
+      iconName = 'menu';
+    } else if (param.component === 'ElPageHeader') {
+      iconName = 'text-page-common';
+    } else if (param.component === 'ElSteps') {
+      iconName = 'position-top';
+    } else if (param.component === 'ElTabs') {
+      iconName = 'tabs';
+    } else if (param.component === 'ElAlert') {
+      iconName = 'alert';
+    } else if (param.component === 'ElDialog') {
+      iconName = 'chat-maximize';
+    } else if (param.component === 'ElDrawer') {
+      iconName = 'collection';
+    } else if (param.component === 'ElLoading') {
+      iconName = 'loading';
+    } else if (param.component === 'ElMessage') {
+      iconName = 'chat-message';
+    } else if (param.component === 'ElMessageBox') {
+      iconName = 'cloud-shell';
+    } else if (param.component === 'ElNotification') {
+      iconName = 'warning';
+    } else if (param.component === 'ElPopconfirm') {
+      iconName = 'flowchart-evs';
+    } else if (param.component === 'ElPopover') {
+      iconName = 'popover';
+    } else if (param.component === 'ElTooltip') {
+      iconName = 'tooltip';
+    } else if (param.component === 'ElDivider') {
+      iconName = 'border-style-solid';
+    } else if (param.component === 'ElWatermark') {
+      iconName = 'carouselitem';
     }
-  
-    const snippet = {
-      group: 'element-plus',
-      children: snippetChildrens
+
+    const snippetChildren = {
+      name: { zh_CN: param?.name?.['zh_CN'] || EMPTY_VALUE },
+      icon: iconName, // 使用更新后的 icon
+      screenshot: '', // Screenshot URL or path, if available
+      snippetName: param.component,
+      schema: {} // Schema structure, populate as needed
     };
-  
-    snippets.push(snippet);
-  
-    return snippets;
+
+    snippetChildrens.push(snippetChildren);
   }
-  
+
+  const snippet = {
+    group: 'element-plus',
+    children: snippetChildrens
+  };
+
+  snippets.push(snippet);
+
+  return snippets;
+}
+
 
 async function generateMaterial(params) {
   const components = await generateComponent(params)
